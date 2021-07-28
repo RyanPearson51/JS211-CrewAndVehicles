@@ -19,7 +19,7 @@ class Vehicle {
     //type - type of the vehicle
     //assignedCrew - an array of crew members assigned to the vehicle
 
-    constructor(id, type, assignedCrew){
+    constructor(id, type/*, assignedCrew?*/){
         this.id = id;
         this.type = type;
         this.assignedCrew = [];
@@ -60,24 +60,24 @@ class CrewMember {
     //title - title of the crew member
     //assignedVehicle - the vehicle this crew member is assigned to (entire Vehicle object)
 
-    constructor(name, title, assignedVehicle){
+    constructor(name, title/*,assignedVehicle?*/){
         this.name = name;
         this.title = title;
-        this.assignedVehicle = null;
+        this.assignedVehicle = null
     }
 3
 
-    //assignTo(Vehicle) - assign this crew member to the vehicle passed in and update the vehicles list of assigned crew
+    //assignTo(vehicle) - assign this crew member to the vehicle passed in and update the vehicles list of assigned crew
     assignTo(vehicle){
         //something is wrong with this method.  getting 'circular' error in the assignedCrew and assignedVehicle arrays
         
-        this.assignedVehicle = vehicle;
-        vehicle.assignedCrew.push(this);
+        /*this.assignedVehicle = vehicle;
+        vehicle.assignedCrew.push(this);*/
 
-        //tried it this way as well, no circular error, but the assignedCrew arrays would just come back
-        //as anything i typed in to this.assignedVehicle above. (null would show null, 4 would show 4 leaving it blank would show undefined)
-        /*let vehicleToGoTo = this.assignedVehicle;
-        vehicle.assignedCrew.push(vehicleToGoTo)*/
+        //crew members assigned vehicle is the one passed in
+        this.assignedVehicle = vehicle;
+        //add new crew member to assignedCrew array for that vehicle
+        this.assignedVehicle.assignedCrew.push(this);
     }
 }
 
